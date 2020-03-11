@@ -1,0 +1,8 @@
+/MATLAB/symbolic/+codegen
+/MATLAB/symbolic/+frost_expr
+/MATLAB/symbolic/Plotting
+/gen/src/
+/gen/include/frost_expr/kinematics/
+/gen/include/frost_expr/dynamics/
+/gen/include/frost_expr/outputs/
+/gen/include/frost_expr/constraints/
