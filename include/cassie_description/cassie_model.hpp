@@ -1,15 +1,17 @@
+/*
+ * @brief Primary interface and class for evaluating the Cassie model dynamics and kinematics.
+ * @author Jenna Reher (jreher@caltech.edu)
+ */
+
 #ifndef CASSIE_MODEL_HPP
 #define CASSIE_MODEL_HPP
 
-#include <cassie_description/CassieStateEnum.hpp>
+#include <cassie_common_toolbox/CassieStateEnum.hpp>
+#include <cassie_common_toolbox/geometry.hpp>
 #include <rbdl/rbdl.h>
 #include <frost_expr/all.hpp>
-#include <Eigen/Geometry>
-
 
 namespace cassie_model {
-
-Matrix3d skew(Vector3d &v);
 
 class BodyPoint
 {

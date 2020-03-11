@@ -5,7 +5,7 @@ add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 find_package(catkin REQUIRED COMPONENTS
-    roscpp rospy roslib eigen_utilities
+    roscpp rospy roslib eigen_utilities cassie_common_toolbox
 )
 
 # Find RBDL
@@ -21,7 +21,7 @@ ENDIF (RBDL_FOUND)
 catkin_package(
    INCLUDE_DIRS include gen/include gen/include/frost_expr gen/src ${RBDL_INCLUDE_DIRS}
    LIBRARIES ${PROJECT_NAME} ${RBDL_LIBRARIES}
-   CATKIN_DEPENDS roscpp rospy roslib eigen_utilities
+   CATKIN_DEPENDS roscpp rospy roslib eigen_utilities cassie_common_toolbox
    DEPENDS RBDL)
 
 ###########

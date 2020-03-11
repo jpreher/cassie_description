@@ -34,15 +34,6 @@ using namespace Eigen;
 
 namespace cassie_model {
 
-Matrix3d skew(Vector3d &v) {
-    Matrix3d sk;
-
-    sk << 0.0, -v(2), v(1),
-          v(2), 0.0, -v(0),
-         -v(1), v(0), 0.0;
-    return sk;
-}
-
 void BodyPoint::initialize(Model *model, std::string point_name, std::string body_name, Eigen::Vector3d &point_position) {
     this->body_name = body_name;
     this->point_name = point_name;
