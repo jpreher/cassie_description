@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="default">
+    <physics type='ode'> <!-- ode / simbody / bullet / dart -->
+      <max_step_size>0.0005</max_step_size>
+      <real_time_factor>1.000000</real_time_factor>
+      <real_time_update_rate>2000.000000</real_time_update_rate>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>50</iters>
+        </solver>
+      </ode>
+    </physics>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+  </world>
+</sdf>

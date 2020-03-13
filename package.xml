@@ -2,7 +2,7 @@
 <package>
   <name>cassie_description</name>
   <version>0.0.0</version>
-  <description>Cassie Model Description</description>
+  <description>Cassie model description</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
