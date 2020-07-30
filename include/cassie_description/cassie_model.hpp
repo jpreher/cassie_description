@@ -70,6 +70,7 @@ public:
 
     void computeConstrainedToeJacobian(Eigen::VectorXd &q, Eigen::MatrixXd &Jl, Eigen::MatrixXd &Jr);
     void computeConstrainedFootJacobian(Eigen::VectorXd &q, Eigen::MatrixXd &Jl, Eigen::MatrixXd &Jr);
+    void computeStanceConstrainedJacobian(Eigen::VectorXd &q, Eigen::MatrixXd &Jl, Eigen::MatrixXd &Jr);
 };
 
 class Dynamics

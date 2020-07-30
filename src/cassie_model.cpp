@@ -200,6 +200,51 @@ void Kinematics::computeConstrainedFootJacobian(Eigen::VectorXd &q, Eigen::Matri
     Jr = Jrf_active - ca->J_poseRight.block(0, CassieStateEnum::RightTarsusPitch, 3, 1) / ca->J_achilles(1, CassieStateEnum::RightTarsusPitch) * Jach_active_rf;
 } // Kinematics::computeConstrainedFootJacobian
 
+void Kinematics::computeStanceConstrainedJacobian(Eigen::VectorXd &q, Eigen::MatrixXd &Jl, Eigen::MatrixXd &Jr) {
+    assert_size_vector(q, 22);
+    assert_size_matrix(Jl, 5,7);
+    assert_size_matrix(Jr, 5,7);
+
+    Kinematics::Cache *ca = &this->cache;
+
+    // This assumes that kinematics.update() has been called!
+
+    MatrixXd Jlf_active(5,7), Jrf_active(5,7), Jach_active_lf(1,7), Jach_active_rf(1,7);
+
+    Jlf_active << ca->J_poseLeftConstraint.block(0, CassieStateEnum::LeftHipRoll, 5, 1),
+                  ca->J_poseLeftConstraint.block(0, CassieStateEnum::LeftHipYaw, 5, 1),
+                  ca->J_poseLeftConstraint.block(0, CassieStateEnum::LeftHipPitch, 5, 1),
+                  ca->J_poseLeftConstraint.block(0, CassieStateEnum::LeftKneePitch, 5, 1),
+                  ca->J_poseLeftConstraint.block(0, CassieStateEnum::LeftShinPitch, 5, 1),
+                  ca->J_poseLeftConstraint.block(0, CassieStateEnum::LeftHeelSpring, 5, 1),
+                  ca->J_poseLeftConstraint.block(0, CassieStateEnum::LeftFootPitch, 5, 1);
+    Jrf_active << ca->J_poseRightConstraint.block(0, CassieStateEnum::RightHipRoll, 5, 1),
+                  ca->J_poseRightConstraint.block(0, CassieStateEnum::RightHipYaw, 5, 1),
+                  ca->J_poseRightConstraint.block(0, CassieStateEnum::RightHipPitch, 5, 1),
+                  ca->J_poseRightConstraint.block(0, CassieStateEnum::RightKneePitch, 5, 1),
+                  ca->J_poseRightConstraint.block(0, CassieStateEnum::RightShinPitch, 5, 1),
+                  ca->J_poseRightConstraint.block(0, CassieStateEnum::RightHeelSpring, 5, 1),
+                  ca->J_poseRightConstraint.block(0, CassieStateEnum::RightFootPitch, 5, 1);
+
+    Jach_active_lf << ca->J_achilles.block(0, CassieStateEnum::LeftHipRoll, 1, 1),
+                      ca->J_achilles.block(0, CassieStateEnum::LeftHipYaw, 1, 1),
+                      ca->J_achilles.block(0, CassieStateEnum::LeftHipPitch, 1, 1),
+                      ca->J_achilles.block(0, CassieStateEnum::LeftKneePitch, 1, 1),
+                      ca->J_achilles.block(0, CassieStateEnum::LeftShinPitch, 1, 1),
+                      ca->J_achilles.block(0, CassieStateEnum::LeftHeelSpring, 1, 1),
+                      ca->J_achilles.block(0, CassieStateEnum::LeftFootPitch, 1, 1);
+    Jach_active_rf << ca->J_achilles.block(1, CassieStateEnum::RightHipRoll, 1, 1),
+                      ca->J_achilles.block(1, CassieStateEnum::RightHipYaw, 1, 1),
+                      ca->J_achilles.block(1, CassieStateEnum::RightHipPitch, 1, 1),
+                      ca->J_achilles.block(1, CassieStateEnum::RightKneePitch, 1, 1),
+                      ca->J_achilles.block(1, CassieStateEnum::RightShinPitch, 1, 1),
+                      ca->J_achilles.block(1, CassieStateEnum::RightHeelSpring, 1, 1),
+                      ca->J_achilles.block(1, CassieStateEnum::RightFootPitch, 1, 1);
+
+    Jl = Jlf_active - ca->J_poseLeft.block(0, CassieStateEnum::LeftTarsusPitch, 5, 1) / ca->J_achilles(0, CassieStateEnum::LeftTarsusPitch) * Jach_active_lf;
+    Jr = Jrf_active - ca->J_poseRight.block(0, CassieStateEnum::RightTarsusPitch, 5, 1) / ca->J_achilles(1, CassieStateEnum::RightTarsusPitch) * Jach_active_rf;
+} // Kinematics::computeConstrainedFootJacobian
+
 void Dynamics::initialize(Model *model) {
     this->H.resize(model->dof_count,model->dof_count);
     this->C.resize(model->dof_count);
