@@ -8,10 +8,15 @@
       <ode>
         <solver>
           <type>quick</type>
-          <iters>50</iters>
+          <iters>100</iters>
         </solver>
+        <constraints>
+          <erp>0.1</erp>
+          <contact_max_correcting_vel>0.2</contact_max_correcting_vel>
+          <contact_surface_layer>0.0001</contact_surface_layer>
+        </constraints>
       </ode>
-    </physics>
+    </physics> 
     <include>
       <uri>model://sun</uri>
     </include>
