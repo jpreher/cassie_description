@@ -114,6 +114,10 @@ public:
 #include <kinematics/pose_rightFoot.hh>
 #include <kinematics/J_leftFoot.hh>
 #include <kinematics/J_rightFoot.hh>
+#include <kinematics/position_leftFoot.hh>
+#include <kinematics/position_rightFoot.hh>
+#include <kinematics/J_position_leftFoot.hh>
+#include <kinematics/J_position_rightFoot.hh>
 #include <kinematics/p_leftToe.hh>
 #include <kinematics/p_rightToe.hh>
 #include <kinematics/J_leftToe.hh>

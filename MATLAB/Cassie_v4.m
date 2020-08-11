@@ -300,6 +300,9 @@ classdef Cassie_v4 < RobotLinks
             expr{end+1} = SymFunction('pose_leftFoot', leftFootPose, {q});
             expr{end+1} = SymFunction('J_leftFoot', JleftFoot, {q});
             
+            expr{end+1} = SymFunction('position_leftFoot', leftFootPose(1:3), {q});
+            expr{end+1} = SymFunction('J_position_leftFoot', JleftFoot(1:3,:), {q});
+            
             pLeftToe = obj.getCartesianPosition(obj.Joints(obj.getJointIndices('LeftFootPitch')))';
             pLeftToe = pLeftToe.subs(q(1:6), zeros(6,1));
             JleftToe = jacobian(pLeftToe, q);
@@ -316,6 +319,9 @@ classdef Cassie_v4 < RobotLinks
             expr{end+1} = SymFunction('pose_rightFoot', rightFootPose, {q});
             expr{end+1} = SymFunction('J_rightFoot', JrightFoot, {q});
             
+            expr{end+1} = SymFunction('position_rightFoot', rightFootPose(1:3), {q});
+            expr{end+1} = SymFunction('J_position_rightFoot', JrightFoot(1:3,:), {q});
+
             pRightToe = obj.getCartesianPosition(obj.Joints(obj.getJointIndices('RightFootPitch')))';
             pRightToe = pRightToe.subs(q(1:6), zeros(6,1));
             JrightToe = jacobian(pRightToe, q);

@@ -36,6 +36,11 @@ set(SRCS
     gen/src/J_leftFoot.cc
     gen/src/J_rightFoot.cc
     gen/src/p_leftToe.cc
+    gen/src/position_leftFoot.cc
+    gen/src/position_rightFoot.cc
+    gen/src/J_position_leftFoot.cc
+    gen/src/J_position_rightFoot.cc
+    gen/src/p_leftToe.cc
     gen/src/p_rightToe.cc
     gen/src/J_leftToe.cc
     gen/src/J_rightToe.cc
