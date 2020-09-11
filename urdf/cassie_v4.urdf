@@ -111,7 +111,7 @@
 			</material>
 		</visual>
 	</link>
-    <link name="leftheelspring">
+        <link name="leftheelspring">
 		<inertial>
 			<origin rpy="0 0 0" xyz="0.081 0.0022 0"/>
 			<mass value="0.126"/>
@@ -231,7 +231,7 @@
 			</material>
 		</visual>
 	</link>
-    <link name="rightheelspring">
+        <link name="rightheelspring">
 		<inertial>
 			<origin rpy="0 0 0" xyz="0.081 0.0022 0"/>
 			<mass value="0.126"/>
@@ -307,7 +307,7 @@
 		<child link="lefttarsus"/>
 		<limit effort="0" lower="0.75" upper="3.0" velocity="20"/>
 	</joint>
-    <joint name="LeftAchillesSpring" type="revolute">
+        <joint name="LeftAchillesSpring" type="revolute">
 		<origin rpy="-0.0689428 -0.036956 2.7207121" xyz="-0.01269 -0.03059 0.00092"/>
 		<axis xyz="0 0 1"/>
 		<parent link="lefttarsus"/>
@@ -363,7 +363,7 @@
 		<child link="righttarsus"/>
 		<limit effort="0" lower="0.75" upper="3.0" velocity="20"/>
 	</joint>
-    <joint name="RightAchillesSpring" type="revolute">
+        <joint name="RightAchillesSpring" type="revolute">
 		<origin rpy="0.0689428 0.036956 2.7207121" xyz="-0.01269 -0.03059 -0.00092"/>
 		<axis xyz="0 0 1"/>
 		<parent link="righttarsus"/>
@@ -381,73 +381,73 @@
 	<!-- Robot Transmission Definitions -->
 	<!--                                -->
 	<transmission name="LeftHipRollTransmission">
-    	<joint name="LeftHipRoll"/>
-    	<actuator>
-      		<mechanicalReduction>25</mechanicalReduction>
-     		<motorInertia>6.1e-05</motorInertia>
-    	</actuator>
+            <joint name="LeftHipRoll"/>
+            <actuator>
+                    <mechanicalReduction>25</mechanicalReduction>
+                    <motorInertia>6.1e-05</motorInertia>
+            </actuator>
   	</transmission>
   	<transmission name="LeftHipYawTransmission">
-    	<joint name="LeftHipYaw"/>
-    	<actuator>
-      		<mechanicalReduction>25</mechanicalReduction>
-      		<motorInertia>6.1e-05</motorInertia>
-    	</actuator>
+            <joint name="LeftHipYaw"/>
+            <actuator>
+                    <mechanicalReduction>25</mechanicalReduction>
+                    <motorInertia>6.1e-05</motorInertia>
+            </actuator>
   	</transmission>
   	<transmission name="LeftHipPitchTransmission">
-    	<joint name="LeftHipPitch"/>
-    	<actuator>
-      		<mechanicalReduction>16</mechanicalReduction>
-      		<motorInertia>0.000365</motorInertia>
-    	</actuator>
+            <joint name="LeftHipPitch"/>
+            <actuator>
+                    <mechanicalReduction>16</mechanicalReduction>
+                    <motorInertia>0.000365</motorInertia>
+            </actuator>
   	</transmission>
   	<transmission name="LeftKneePitchTransmission">
-    	<joint name="LeftKneePitch"/>
-    	<actuator>
-      		<mechanicalReduction>16</mechanicalReduction>
-      		<motorInertia>0.000365</motorInertia>
-    	</actuator>
+            <joint name="LeftKneePitch"/>
+            <actuator>
+                    <mechanicalReduction>16</mechanicalReduction>
+                    <motorInertia>0.000365</motorInertia>
+            </actuator>
   	</transmission>
   	<transmission name="LeftFootPitchTransmission">
-    	<joint name="LeftFootPitch"/>
-    	<actuator>
-      		<mechanicalReduction>50</mechanicalReduction>
-      		<motorInertia>4.9e-06</motorInertia>
-    	</actuator>
+            <joint name="LeftFootPitch"/>
+            <actuator>
+                    <mechanicalReduction>50</mechanicalReduction>
+                    <motorInertia>4.9e-06</motorInertia>
+            </actuator>
   	</transmission>
   	<transmission name="RightHipRollTransmission">
-    	<joint name="RightHipRoll"/>
-    	<actuator>
-      		<mechanicalReduction>25</mechanicalReduction>
-      		<motorInertia>6.1e-05</motorInertia>
-    	</actuator>
+            <joint name="RightHipRoll"/>
+            <actuator>
+                    <mechanicalReduction>25</mechanicalReduction>
+                    <motorInertia>6.1e-05</motorInertia>
+            </actuator>
   	</transmission>
   	<transmission name="RightHipYawTransmission">
-    	<joint name="RightHipYaw"/>
-    	<actuator>
-      		<mechanicalReduction>25</mechanicalReduction>
-      		<motorInertia>6.1e-05</motorInertia>
-    	</actuator>
+            <joint name="RightHipYaw"/>
+            <actuator>
+                    <mechanicalReduction>25</mechanicalReduction>
+                    <motorInertia>6.1e-05</motorInertia>
+            </actuator>
   	</transmission>
   	<transmission name="RightHipPitchTransmission">
-    	<joint name="RightHipPitch"/>
-    	<actuator>
-      		<mechanicalReduction>16</mechanicalReduction>
-      		<motorInertia>0.000365</motorInertia>
-    	</actuator>
+            <joint name="RightHipPitch"/>
+            <actuator>
+                    <mechanicalReduction>16</mechanicalReduction>
+                    <motorInertia>0.000365</motorInertia>
+            </actuator>
   	</transmission>
   	<transmission name="RightKneePitchTransmission">
-    	<joint name="RightKneePitch"/>
-    	<actuator>
-      		<mechanicalReduction>16</mechanicalReduction>
-      		<motorInertia>0.000365</motorInertia>
-    	</actuator>
+            <joint name="RightKneePitch"/>
+            <actuator>
+                    <mechanicalReduction>16</mechanicalReduction>
+                    <motorInertia>0.000365</motorInertia>
+            </actuator>
   	</transmission>
   	<transmission name="RightFootPitchTransmission">
-    	<joint name="RightFootPitch"/>
-    	<actuator>
-      		<mechanicalReduction>50</mechanicalReduction>
-      		<motorInertia>4.9e-06</motorInertia>
-    	</actuator>
+            <joint name="RightFootPitch"/>
+            <actuator>
+                    <mechanicalReduction>50</mechanicalReduction>
+                    <motorInertia>4.9e-06</motorInertia>
+            </actuator>
   	</transmission>
 </robot>

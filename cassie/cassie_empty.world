@@ -12,7 +12,7 @@
         </solver>
         <constraints>
           <erp>0.1</erp>
-          <contact_max_correcting_vel>0.9</contact_max_correcting_vel>
+          <contact_max_correcting_vel>1.1</contact_max_correcting_vel>
           <contact_surface_layer>0.0001</contact_surface_layer>
         </constraints>
       </ode>
