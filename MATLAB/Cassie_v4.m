@@ -565,9 +565,10 @@ classdef Cassie_v4 < RobotLinks
                             obj.getRelativeEulerAngles(contactLeft, eye(3))'];
             leftSoleConstr = SymExpression(zeros(5,1));     
             leftSoleConstr(:,1) = leftFootPose([1,2,3,5,6],1);
+%             J_leftSoleConstr = jacobian(leftSoleConstr,q);
+%             J_leftSoleConstr = wrenchBase' *  getBodyJacobian(obj, obj.ContactPoints.LeftSole);
+%             J_leftSoleConstr(1:3,:) = jacobian(leftSoleConstr(1:3,:),q);
             J_leftSoleConstr = jacobian(leftSoleConstr,q);
-            J_leftSoleConstr = wrenchBase' *  getBodyJacobian(obj, obj.ContactPoints.LeftSole);
-            %J_leftSoleConstr(1:3,:) = jacobian(leftSoleConstr(1:3,:),q);
             dp_leftSoleConstr = J_leftSoleConstr * dq;
             dJ_leftSoleConstr = jacobian(dp_leftSoleConstr, q);
                         
@@ -604,8 +605,9 @@ classdef Cassie_v4 < RobotLinks
                             obj.getRelativeEulerAngles(contactRight, eye(3))'];
             rightSoleConstr = SymExpression(zeros(5,1));  
             rightSoleConstr = rightFootPose([1,2,3,5,6],1);
-            J_rightSoleConstr = wrenchBase' *  getBodyJacobian(obj, obj.ContactPoints.RightSole);
-            %J_rightSoleConstr(1:3,:) = jacobian(rightSoleConstr(1:3,:),q);
+%             J_rightSoleConstr = wrenchBase' *  getBodyJacobian(obj, obj.ContactPoints.RightSole);
+%             J_rightSoleConstr(1:3,:) = jacobian(rightSoleConstr(1:3,:),q);
+            J_rightSoleConstr = jacobian(rightSoleConstr,q);
             dp_rightSoleConstr = J_rightSoleConstr * dq;
             dJ_rightSoleConstr = jacobian(dp_rightSoleConstr, q);
             
