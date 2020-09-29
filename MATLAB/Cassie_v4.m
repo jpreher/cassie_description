@@ -559,7 +559,7 @@ classdef Cassie_v4 < RobotLinks
             contactLeft = ToContactFrame(obj.ContactPoints.LeftSole, 'PointContactWithFriction');
             contactRight = ToContactFrame(obj.ContactPoints.RightSole, 'PointContactWithFriction');
             pointLeft = ToContactFrame(obj.Joints(getJointIndices(obj, 'LeftFootPitch')), 'PointContactWithFriction');
-            pointRight = ToContactFrame(obj.Joints(getJointIndices(obj, 'LeftFootPitch')), 'PointContactWithFriction');
+            pointRight = ToContactFrame(obj.Joints(getJointIndices(obj, 'RightFootPitch')), 'PointContactWithFriction');
 
             % Left Point Contact
             leftPointPose = [obj.getCartesianPosition(pointLeft)';
