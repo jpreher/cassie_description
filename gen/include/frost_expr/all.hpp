@@ -108,6 +108,7 @@ public:
 //#include <dynamics/Ce_cassie_v4.hh>
 #include <dynamics/De_cassie_v4.hh>
 #include <dynamics/Ge_cassie_v4.hh>
+#include <dynamics/F_spring_cassie_v4.hh>
 
 // Kinematics
 #include <kinematics/pose_leftFoot.hh>

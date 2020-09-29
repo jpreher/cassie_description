@@ -565,9 +565,9 @@ classdef Cassie_v4 < RobotLinks
             leftSoleConstr = SymExpression(zeros(5,1));     
             leftSoleConstr(:,1) = leftFootPose([1,2,3,5,6],1);
             % J_leftSoleConstr = jacobian(leftSoleConstr,q);
-            J_leftSoleConstr = wrenchBase' *  getBodyJacobian(obj, obj.ContactPoints.LeftSole);
-            J_leftSoleConstr(1:3,:) = jacobian(leftSoleConstr(1:3,:),q);
-            % J_leftSoleConstr = jacobian(leftSoleConstr,q);
+            %J_leftSoleConstr = wrenchBase' *  getBodyJacobian(obj, obj.ContactPoints.LeftSole);
+            %J_leftSoleConstr(1:3,:) = jacobian(leftSoleConstr(1:3,:),q);
+            J_leftSoleConstr = jacobian(leftSoleConstr,q);
             dp_leftSoleConstr = J_leftSoleConstr * dq;
             dJ_leftSoleConstr = jacobian(dp_leftSoleConstr, q);
                         
@@ -604,9 +604,9 @@ classdef Cassie_v4 < RobotLinks
                             obj.getRelativeEulerAngles(contactRight, eye(3))'];
             rightSoleConstr = SymExpression(zeros(5,1));  
             rightSoleConstr = rightFootPose([1,2,3,5,6],1);
-            J_rightSoleConstr = wrenchBase' *  getBodyJacobian(obj, obj.ContactPoints.RightSole);
-            J_rightSoleConstr(1:3,:) = jacobian(rightSoleConstr(1:3,:),q);
-            %             J_rightSoleConstr = jacobian(rightSoleConstr,q);
+            % J_rightSoleConstr = wrenchBase' *  getBodyJacobian(obj, obj.ContactPoints.RightSole);
+            % J_rightSoleConstr(1:3,:) = jacobian(rightSoleConstr(1:3,:),q);
+            J_rightSoleConstr = jacobian(rightSoleConstr,q);
             dp_rightSoleConstr = J_rightSoleConstr * dq;
             dJ_rightSoleConstr = jacobian(dp_rightSoleConstr, q);
             
@@ -808,14 +808,14 @@ classdef Cassie_v4 < RobotLinks
            
             % Actual
             Dya_LeftStanceActual  = jacobian(yLeftStanceActual, X);
-            Dya_LeftStanceActual(1,:) = zeros(1,44); Dya_LeftStanceActual(1,rotorIndexing(1))  = -1;
-            Dya_LeftStanceActual(2,:) = zeros(1,44); Dya_LeftStanceActual(2,rotorIndexing(3))  =  1;
-            Dya_LeftStanceActual(9,:) = zeros(1,44); Dya_LeftStanceActual(9,rotorIndexing(10)) = -1;
+            %             Dya_LeftStanceActual(1,:) = zeros(1,44); Dya_LeftStanceActual(1,rotorIndexing(1))  = -1;
+            %             Dya_LeftStanceActual(2,:) = zeros(1,44); Dya_LeftStanceActual(2,rotorIndexing(3))  =  1;
+            %             Dya_LeftStanceActual(9,:) = zeros(1,44); Dya_LeftStanceActual(9,rotorIndexing(10)) = -1;
             
             Dya_RightStanceActual = jacobian(yRightStanceActual, X);
-            Dya_RightStanceActual(1,:) = zeros(1,44); Dya_RightStanceActual(1,rotorIndexing(6)) = -1;
-            Dya_RightStanceActual(2,:) = zeros(1,44); Dya_RightStanceActual(2,rotorIndexing(8)) =  1;
-            Dya_RightStanceActual(9,:) = zeros(1,44); Dya_RightStanceActual(9,rotorIndexing(5)) = -1;
+            %             Dya_RightStanceActual(1,:) = zeros(1,44); Dya_RightStanceActual(1,rotorIndexing(6)) = -1;
+            %             Dya_RightStanceActual(2,:) = zeros(1,44); Dya_RightStanceActual(2,rotorIndexing(8)) =  1;
+            %             Dya_RightStanceActual(9,:) = zeros(1,44); Dya_RightStanceActual(9,rotorIndexing(5)) = -1;
             
             DLfya_LeftStanceActual  = jacobian(Dya_LeftStanceActual*dX, X);
             DLfya_RightStanceActual = jacobian(Dya_RightStanceActual*dX, X);
