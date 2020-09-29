@@ -76,6 +76,8 @@ public:
 
 
 // Constraints
+#include <constraints/J_leftPoint_constraint.hh>
+#include <constraints/J_rightPoint_constraint.hh>
 #include <constraints/J_achilles_constraint.hh>
 #include <constraints/J_leftHeel_constraint.hh>
 #include <constraints/J_leftToe_constraint.hh>
@@ -85,6 +87,8 @@ public:
 #include <constraints/J_rightSole_constraint.hh>
 #include <constraints/J_left_fixed_constraint.hh>
 #include <constraints/J_right_fixed_constraint.hh>
+#include <constraints/Jdot_leftPoint_constraint.hh>
+#include <constraints/Jdot_rightPoint_constraint.hh>
 #include <constraints/Jdot_achilles_constraint.hh>
 #include <constraints/Jdot_leftHeel_constraint.hh>
 #include <constraints/Jdot_leftToe_constraint.hh>
@@ -94,6 +98,8 @@ public:
 #include <constraints/Jdot_rightSole_constraint.hh>
 #include <constraints/Jdot_left_fixed_constraint.hh>
 #include <constraints/Jdot_right_fixed_constraint.hh>
+#include <constraints/p_leftPoint_constraint.hh>
+#include <constraints/p_rightPoint_constraint.hh>
 #include <constraints/p_achilles_constraint.hh>
 #include <constraints/p_leftHeel_constraint.hh>
 #include <constraints/p_leftToe_constraint.hh>

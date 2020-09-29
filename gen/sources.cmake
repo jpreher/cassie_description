@@ -4,6 +4,8 @@ set(SRCS
     gen/src/Ge_cassie_v4.cc
     gen/src/F_spring_cassie_v4.cc
     gen/src/p_achilles_constraint.cc
+    gen/src/p_leftPoint_constraint.cc
+    gen/src/p_rightPoint_constraint.cc
     gen/src/p_leftHeel_constraint.cc
     gen/src/p_leftToe_constraint.cc
     gen/src/p_leftSole_constraint.cc
@@ -13,6 +15,8 @@ set(SRCS
     gen/src/p_left_fixed_constraint.cc
     gen/src/p_right_fixed_constraint.cc
     gen/src/J_achilles_constraint.cc
+    gen/src/J_leftPoint_constraint.cc
+    gen/src/J_rightPoint_constraint.cc
     gen/src/J_leftHeel_constraint.cc
     gen/src/J_leftToe_constraint.cc
     gen/src/J_leftSole_constraint.cc
@@ -21,6 +25,8 @@ set(SRCS
     gen/src/J_rightSole_constraint.cc
     gen/src/J_left_fixed_constraint.cc
     gen/src/J_right_fixed_constraint.cc
+    gen/src/Jdot_leftPoint_constraint.cc
+    gen/src/Jdot_rightPoint_constraint.cc
     gen/src/Jdot_achilles_constraint.cc
     gen/src/Jdot_leftHeel_constraint.cc
     gen/src/Jdot_leftToe_constraint.cc
@@ -30,6 +36,7 @@ set(SRCS
     gen/src/Jdot_rightSole_constraint.cc
     gen/src/Jdot_left_fixed_constraint.cc
     gen/src/Jdot_right_fixed_constraint.cc
+
     gen/src/p_com.cc
     gen/src/pose_leftFoot.cc
     gen/src/pose_rightFoot.cc

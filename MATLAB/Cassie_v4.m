@@ -558,6 +558,33 @@ classdef Cassie_v4 < RobotLinks
             % Get contact frames
             contactLeft = ToContactFrame(obj.ContactPoints.LeftSole, 'PointContactWithFriction');
             contactRight = ToContactFrame(obj.ContactPoints.RightSole, 'PointContactWithFriction');
+            pointLeft = ToContactFrame(obj.Joints(getJointIndices(obj, 'LeftFootPitch')), 'PointContactWithFriction');
+            pointRight = ToContactFrame(obj.Joints(getJointIndices(obj, 'LeftFootPitch')), 'PointContactWithFriction');
+
+            % Left Point Contact
+            leftPointPose = [obj.getCartesianPosition(pointLeft)';
+                            obj.getRelativeEulerAngles(pointLeft, eye(3))'];
+            leftPointConstr = leftPointPose([1,2,3, 6],1);
+            J_leftPointConstr = jacobian(leftPointConstr,q);
+            dp_leftPointConstr = J_leftPointConstr * dq;
+            dJ_leftPointConstr = jacobian(dp_leftPointConstr, q);
+            
+            expr{end+1} = SymFunction('p_leftPoint_constraint', leftPointConstr, q);
+            expr{end+1} = SymFunction('J_leftPoint_constraint', J_leftPointConstr, q);
+            expr{end+1} = SymFunction('Jdot_leftPoint_constraint', dJ_leftPointConstr, {q, dq});
+            
+            % Right Point Contact
+            rightPointPose = [obj.getCartesianPosition(pointRight)';
+                            obj.getRelativeEulerAngles(pointRight, eye(3))'];
+            rightPointConstr = rightPointPose([1,2,3, 6],1);
+            J_rightPointConstr = jacobian(rightPointConstr,q);
+            dp_rightPointConstr = J_rightPointConstr * dq;
+            dJ_rightPointConstr = jacobian(dp_rightPointConstr, q);
+            
+            expr{end+1} = SymFunction('p_rightPoint_constraint', rightPointConstr, q);
+            expr{end+1} = SymFunction('J_rightPoint_constraint', J_rightPointConstr, q);
+            expr{end+1} = SymFunction('Jdot_rightPoint_constraint', dJ_rightPointConstr, {q, dq});
+            
             
             % Left Sole
             leftFootPose = [obj.getCartesianPosition(contactLeft)';
