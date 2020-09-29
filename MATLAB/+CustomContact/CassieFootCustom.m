@@ -54,8 +54,9 @@ function [ domain ] = CassieFootCustom( domain, foot, addZMP )
     constr =  G' * h;
     % compute the body jacobian
     jac = getBodyJacobian(domain, contact);
-    % extract the contrained elements
     constr_jac = wrenchBase' * jac;
+    % compute the spatial jacobian for Cartesian positions
+    constr_jac(1:3,:) = jacobian(constr(1:3), domain.States.x);
     
     % label for the holonomic constraint
     label_full = cellfun(@(x)[contact.Name,x],...
