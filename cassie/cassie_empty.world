@@ -8,11 +8,12 @@
       <ode>
         <solver>
           <type>quick</type>
-          <iters>125</iters>
+          <iters>150</iters>
         </solver>
         <constraints>
-          <erp>0.1</erp>
-          <contact_max_correcting_vel>1.1</contact_max_correcting_vel>
+          <erp>0.2</erp>
+          <cfm>0.0000002</cfm>
+          <contact_max_correcting_vel>10</contact_max_correcting_vel>
           <contact_surface_layer>0.0001</contact_surface_layer>
         </constraints>
       </ode>
