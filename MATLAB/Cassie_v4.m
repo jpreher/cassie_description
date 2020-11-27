@@ -816,9 +816,17 @@ classdef Cassie_v4 < RobotLinks
             J_yLeftStanceActual  = jacobian(yLeftStanceActual,  SymVariable(q(rotorIndexing)));
             J_yRightStanceActual = jacobian(yRightStanceActual, SymVariable(q(rotorIndexing)));
             
+            % And their time derivatives
+            Jdot_yLeftStanceActual  = jacobian(J_yLeftStanceActual*SymVariable(dq(rotorIndexing,1)), SymVariable(dq(rotorIndexing)));
+            Jdot_yRightStanceActual = jacobian(J_yRightStanceActual*SymVariable(dq(rotorIndexing,1)), SymVariable(dq(rotorIndexing)));
+            
             % Create Jacobians for floating base terms
             % Left
-            %             leftFootOrientation = leftFootOrientation.subs(q(1:6), zeros(6,1));
+            %leftFootOrientation = leftFootOrientation.subs(q([1:6]), zeros(6,1));
+            %leftFootOrientation = leftFootOrientation.subs(q('LeftShinPitch'), 0);
+            %leftFootOrientation = leftFootOrientation.subs(q('LeftTarsusPitch'), deg2rad(13) - q('LeftKneePitch'));
+            %leftFootOrientation = eval_math_fun('Simplify', leftFootOrientation);
+            %leftFootOrientation = eval_math_fun('Chop', leftFootOrientation);
             %             J_yLeftStanceActual(1,:) = jacobian(-leftFootOrientation(1),  SymVariable(q(rotorIndexing)));
             %             J_yLeftStanceActual(1,:) = jacobian(-left_tp_orientation(2),  SymVariable(q(rotorIndexing)));
             J_yLeftStanceActual(1,:) = zeros(1,10); J_yLeftStanceActual(1,1)  = -1;
@@ -826,7 +834,11 @@ classdef Cassie_v4 < RobotLinks
             J_yLeftStanceActual(9,:) = zeros(1,10); J_yLeftStanceActual(9,10) = -1;
             
             % Right
-            %             rightFootOrientation = rightFootOrientation.subs(q(1:6), zeros(6,1));
+            %rightFootOrientation = rightFootOrientation.subs(q([1:6]), zeros(6,1));
+            %rightFootOrientation = rightFootOrientation.subs(q('RightShinPitch'), 0);
+            %rightFootOrientation = rightFootOrientation.subs(q('RightTarsusPitch'), deg2rad(13) - q('RightKneePitch'));
+            %rightFootOrientation = eval_math_fun('Simplify', rightFootOrientation);
+            %rightFootOrientation = eval_math_fun('Chop', rightFootOrientation);
             %             J_yRightStanceActual(1,:) = jacobian(-rightFootOrientation(1),  SymVariable(q(rotorIndexing)));
             %             J_yRightStanceActual(1,:) = jacobian(-right_tp_orientation(2),  SymVariable(q(rotorIndexing)));
             J_yRightStanceActual(1,:) = zeros(1,10); J_yRightStanceActual(1,6) = -1;
@@ -835,14 +847,18 @@ classdef Cassie_v4 < RobotLinks
            
             % Actual
             Dya_LeftStanceActual  = jacobian(yLeftStanceActual, X);
-            %             Dya_LeftStanceActual(1,:) = zeros(1,44); Dya_LeftStanceActual(1,rotorIndexing(1))  = -1;
-            %             Dya_LeftStanceActual(2,:) = zeros(1,44); Dya_LeftStanceActual(2,rotorIndexing(3))  =  1;
-            %             Dya_LeftStanceActual(9,:) = zeros(1,44); Dya_LeftStanceActual(9,rotorIndexing(10)) = -1;
+            % Dya_LeftStanceActual(1,:) = [jacobian(q('BaseRotX')-leftFootOrientation(1),q), zeros(1,22)];
+            % Dya_LeftStanceActual(2,:) = [jacobian(q('BaseRotY')-leftFootOrientation(2),q), zeros(1,22)];
+            %            Dya_LeftStanceActual(1,:) = zeros(1,44); Dya_LeftStanceActual(1,rotorIndexing(1))  = -1;
+            %            Dya_LeftStanceActual(2,:) = zeros(1,44); Dya_LeftStanceActual(2,rotorIndexing(3))  =  1;
+            %            Dya_LeftStanceActual(9,:) = zeros(1,44); Dya_LeftStanceActual(9,rotorIndexing(10)) = -1;
             
             Dya_RightStanceActual = jacobian(yRightStanceActual, X);
-            %             Dya_RightStanceActual(1,:) = zeros(1,44); Dya_RightStanceActual(1,rotorIndexing(6)) = -1;
-            %             Dya_RightStanceActual(2,:) = zeros(1,44); Dya_RightStanceActual(2,rotorIndexing(8)) =  1;
-            %             Dya_RightStanceActual(9,:) = zeros(1,44); Dya_RightStanceActual(9,rotorIndexing(5)) = -1;
+            % Dya_RightStanceActual(1,:) = [jacobian(q('BaseRotX')-rightFootOrientation(1),q), zeros(1,22)];
+            % Dya_RightStanceActual(2,:) = [jacobian(q('BaseRotY')-rightFootOrientation(2),q), zeros(1,22)];
+            %            Dya_RightStanceActual(1,:) = zeros(1,44); Dya_RightStanceActual(1,rotorIndexing(6)) = -1;
+            %            Dya_RightStanceActual(2,:) = zeros(1,44); Dya_RightStanceActual(2,rotorIndexing(8)) =  1;
+            %            Dya_RightStanceActual(9,:) = zeros(1,44); Dya_RightStanceActual(9,rotorIndexing(5)) = -1;
             
             DLfya_LeftStanceActual  = jacobian(Dya_LeftStanceActual*dX, X);
             DLfya_RightStanceActual = jacobian(Dya_RightStanceActual*dX, X);
@@ -858,6 +874,8 @@ classdef Cassie_v4 < RobotLinks
             expr{end+1} = SymFunction('dyaRightStance', dyRightStanceActual, {q, dq});
             expr{end+1} = SymFunction('J_yaLeftStance', J_yLeftStanceActual, {q});
             expr{end+1} = SymFunction('J_yaRightStance', J_yRightStanceActual, {q});
+            expr{end+1} = SymFunction('Jdot_yaLeftStance', Jdot_yLeftStanceActual, {q, dq});
+            expr{end+1} = SymFunction('Jdot_yaRightStance', Jdot_yRightStanceActual, {q, dq});
             expr{end+1} = SymFunction('Dya_LeftStanceActual', Dya_LeftStanceActual, {q});
             expr{end+1} = SymFunction('Dya_RightStanceActual', Dya_RightStanceActual, {q});
             expr{end+1} = SymFunction('DLfya_LeftStanceActual', DLfya_LeftStanceActual, {q,dq});

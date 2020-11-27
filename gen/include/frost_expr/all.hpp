@@ -135,6 +135,8 @@ public:
 #include <outputs/DLfya_LeftStanceActual.hh>
 #include <outputs/DLfya_RightStanceActual.hh>
 #include <outputs/DLfya_standCOM.hh>
+#include <outputs/Jdot_yaLeftStance.hh>
+#include <outputs/Jdot_yaRightStance.hh>
 #include <outputs/Dya_LeftStanceActual.hh>
 #include <outputs/Dya_RightStanceActual.hh>
 #include <outputs/Dya_standCOM.hh>

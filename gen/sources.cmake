@@ -63,6 +63,8 @@ set(SRCS
     gen/src/DLfya_LeftStanceActual.cc
     gen/src/DLfya_RightStanceActual.cc
     gen/src/DLfya_standCOM.cc
+    gen/src/Jdot_yaLeftStance.cc
+    gen/src/Jdot_yaRightStance.cc
     gen/src/Dya_LeftStanceActual.cc
     gen/src/Dya_RightStanceActual.cc
     gen/src/Dya_standCOM.cc
