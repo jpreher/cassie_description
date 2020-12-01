@@ -747,13 +747,13 @@ classdef Cassie_v4 < RobotLinks
             vector = vector.subs(q('LeftHipRoll'), 0);
             vector = vector.subs(q('LeftShinPitch'), 0);
             vector = vector.subs(q('LeftTarsusPitch'), deg2rad(13) - q('LeftKneePitch'));
-            vector = eval_math_fun('Simplify', vector);
-            vector = eval_math_fun('Chop', vector);
+            %vector = eval_math_fun('Simplify', vector);
+            %vector = eval_math_fun('Chop', vector);
             left_pitch = atan2(-vector(1), -vector(3));
             
             left_legLength = vector(1).^2 + vector(2).^2 + vector(3).^2;
-            left_legLength = eval_math_fun('Simplify', left_legLength);
-            left_legLength = eval_math_fun('Chop', left_legLength);
+            %left_legLength = eval_math_fun('Simplify', left_legLength);
+            %left_legLength = eval_math_fun('Chop', left_legLength);
             left_legLength = sqrt(left_legLength);
             
             
@@ -766,13 +766,13 @@ classdef Cassie_v4 < RobotLinks
             vector = vector.subs(q('RightHipRoll'), 0);
             vector = vector.subs(q('RightShinPitch'), 0);
             vector = vector.subs(q('RightTarsusPitch'), deg2rad(13) - q('RightKneePitch'));
-            vector = eval_math_fun('Simplify', vector);
-            vector = eval_math_fun('Chop', vector);
+            %vector = eval_math_fun('Simplify', vector);
+            %vector = eval_math_fun('Chop', vector);
             right_pitch = atan2(-vector(1), -vector(3));
             
             right_legLength = vector(1).^2 + vector(2).^2 + vector(3).^2;
-            right_legLength = eval_math_fun('Simplify', right_legLength);
-            right_legLength = eval_math_fun('Chop', right_legLength);
+            %right_legLength = eval_math_fun('Simplify', right_legLength);
+            %right_legLength = eval_math_fun('Chop', right_legLength);
             right_legLength = sqrt(right_legLength);
             
             % Foot Orientations
@@ -851,14 +851,14 @@ classdef Cassie_v4 < RobotLinks
             % Dya_LeftStanceActual(2,:) = [jacobian(q('BaseRotY')-leftFootOrientation(2),q), zeros(1,22)];
             %            Dya_LeftStanceActual(1,:) = zeros(1,44); Dya_LeftStanceActual(1,rotorIndexing(1))  = -1;
             %            Dya_LeftStanceActual(2,:) = zeros(1,44); Dya_LeftStanceActual(2,rotorIndexing(3))  =  1;
-            %            Dya_LeftStanceActual(9,:) = zeros(1,44); Dya_LeftStanceActual(9,rotorIndexing(10)) = -1;
+            Dya_LeftStanceActual(9,:) = zeros(1,44); Dya_LeftStanceActual(9,rotorIndexing(10)) = -1;
             
             Dya_RightStanceActual = jacobian(yRightStanceActual, X);
             % Dya_RightStanceActual(1,:) = [jacobian(q('BaseRotX')-rightFootOrientation(1),q), zeros(1,22)];
             % Dya_RightStanceActual(2,:) = [jacobian(q('BaseRotY')-rightFootOrientation(2),q), zeros(1,22)];
             %            Dya_RightStanceActual(1,:) = zeros(1,44); Dya_RightStanceActual(1,rotorIndexing(6)) = -1;
             %            Dya_RightStanceActual(2,:) = zeros(1,44); Dya_RightStanceActual(2,rotorIndexing(8)) =  1;
-            %            Dya_RightStanceActual(9,:) = zeros(1,44); Dya_RightStanceActual(9,rotorIndexing(5)) = -1;
+            Dya_RightStanceActual(9,:) = zeros(1,44); Dya_RightStanceActual(9,rotorIndexing(5)) = -1;
             
             DLfya_LeftStanceActual  = jacobian(Dya_LeftStanceActual*dX, X);
             DLfya_RightStanceActual = jacobian(Dya_RightStanceActual*dX, X);
