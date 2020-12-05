@@ -62,6 +62,10 @@ set(SRCS
     gen/src/Jya_standCOM.cc
     gen/src/DLfya_LeftStanceActual.cc
     gen/src/DLfya_RightStanceActual.cc
+    gen/src/leftLegAngle.cc
+    gen/src/rightLegAngle.cc
+    gen/src/leftLegAngleVelocity.cc
+    gen/src/rightLegAngleVelocity.cc
     gen/src/DLfya_standCOM.cc
     gen/src/Jdot_yaLeftStance.cc
     gen/src/Jdot_yaRightStance.cc

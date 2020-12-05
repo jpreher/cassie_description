@@ -867,6 +867,19 @@ classdef Cassie_v4 < RobotLinks
             dyLeftStanceActual  = jacobian(yLeftStanceActual,  q) * dq;
             dyRightStanceActual = jacobian(yRightStanceActual, q) * dq;
             
+            % Force feedback kinematic terms
+            p_lf = obj.getCartesianPosition(left_tp_frame)';
+            p_rf = obj.getCartesianPosition(right_tp_frame)';
+            p_lf = p_lf.subs(q([1:3,6]), zeros(4,1));
+            p_rf = p_rf.subs(q([1:3,6]), zeros(4,1));
+            %             p_lf = eval_math_fun('Simplify', p_lf);
+            %             p_rf = eval_math_fun('Simplify', p_rf);
+
+            legangle_left  = atan2(sqrt(p_lf(1).^2 + p_lf(2).^2), -p_lf(3));
+            legangle_right = atan2(sqrt(p_rf(1).^2 + p_rf(2).^2), -p_rf(3));
+            legangle_dot_left  = jacobian(legangle_left, q)*dq;
+            legangle_dot_right = jacobian(legangle_right, q)*dq;
+            
             % Compile
             expr{end+1} = SymFunction('yaLeftStance', yLeftStanceActual, {q});
             expr{end+1} = SymFunction('yaRightStance', yRightStanceActual, {q});
@@ -880,6 +893,11 @@ classdef Cassie_v4 < RobotLinks
             expr{end+1} = SymFunction('Dya_RightStanceActual', Dya_RightStanceActual, {q});
             expr{end+1} = SymFunction('DLfya_LeftStanceActual', DLfya_LeftStanceActual, {q,dq});
             expr{end+1} = SymFunction('DLfya_RightStanceActual', DLfya_RightStanceActual, {q,dq});
+            expr{end+1} = SymFunction('Dya_LeftStanceActual', Dya_LeftStanceActual, {q});
+            expr{end+1} = SymFunction('leftLegAngle', legangle_left, {q});
+            expr{end+1} = SymFunction('rightLegAngle', legangle_right, {q});
+            expr{end+1} = SymFunction('leftLegAngleVelocity', legangle_dot_left, {q,dq});
+            expr{end+1} = SymFunction('rightLegAngleVelocity', legangle_dot_right, {q,dq});
             
             % Export the files
             for i = 1:length(expr)

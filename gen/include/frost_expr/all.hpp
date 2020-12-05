@@ -149,5 +149,9 @@ public:
 #include <outputs/yaLeftStance.hh>
 #include <outputs/yaRightStance.hh>
 #include <outputs/yaStandCOM.hh>
+#include <outputs/leftLegAngle.hh>
+#include <outputs/rightLegAngle.hh>
+#include <outputs/leftLegAngleVelocity.hh>
+#include <outputs/rightLegAngleVelocity.hh>
 
 #endif // FROSTALL_HPP
