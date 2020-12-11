@@ -868,15 +868,17 @@ classdef Cassie_v4 < RobotLinks
             dyRightStanceActual = jacobian(yRightStanceActual, q) * dq;
             
             % Force feedback kinematic terms
-            p_lf = obj.getCartesianPosition(left_tp_frame)';
-            p_rf = obj.getCartesianPosition(right_tp_frame)';
+            p_lr = obj.getCartesianPosition(obj.Joints(getJointIndices(obj, 'LeftHipRoll')))';
+            p_rr = obj.getCartesianPosition(obj.Joints(getJointIndices(obj, 'RightHipRoll')))';            
+            p_lf = obj.getCartesianPosition(left_tp_frame)' - p_lr;
+            p_rf = obj.getCartesianPosition(right_tp_frame)' - p_rr;
             p_lf = p_lf.subs(q([1:3,6]), zeros(4,1));
             p_rf = p_rf.subs(q([1:3,6]), zeros(4,1));
-            %             p_lf = eval_math_fun('Simplify', p_lf);
-            %             p_rf = eval_math_fun('Simplify', p_rf);
 
-            legangle_left  = atan2(sqrt(p_lf(1).^2 + p_lf(2).^2), -p_lf(3));
-            legangle_right = atan2(sqrt(p_rf(1).^2 + p_rf(2).^2), -p_rf(3));
+            % legangle_left  = atan2(sqrt(p_lf(1).^2 + p_lf(2).^2), -p_lf(3));
+            % legangle_right = atan2(sqrt(p_rf(1).^2 + p_rf(2).^2), -p_rf(3));
+            legangle_left  = atan2(p_lf(1), -p_lf(3));
+            legangle_right = atan2(p_rf(1), -p_rf(3));
             legangle_dot_left  = jacobian(legangle_left, q)*dq;
             legangle_dot_right = jacobian(legangle_right, q)*dq;
             
