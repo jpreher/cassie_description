@@ -879,11 +879,19 @@ classdef Cassie_v4 < RobotLinks
             % legangle_right = atan2(sqrt(p_rf(1).^2 + p_rf(2).^2), -p_rf(3));
             legpitch_left  = atan2(p_lf(1), -p_lf(3));
             legpitch_right = atan2(p_rf(1), -p_rf(3));
+            legpitch_left = legpitch_left.subs(q(obj.getJointIndices({'LeftShinPitch', 'RightShinPitch'})), zeros(2,1));
+            legpitch_left = legpitch_left.subs(q(obj.getJointIndices({'LeftTarsusPitch', 'RightTarsusPitch'})), deg2rad(13) - q(obj.getJointIndices({'LeftKneePitch', 'RightKneePitch'})));
+            legpitch_right = legpitch_right.subs(q(obj.getJointIndices({'LeftShinPitch', 'RightShinPitch'})), zeros(2,1));
+            legpitch_right = legpitch_right.subs(q(obj.getJointIndices({'LeftTarsusPitch', 'RightTarsusPitch'})), deg2rad(13) - q(obj.getJointIndices({'LeftKneePitch', 'RightKneePitch'})));
             legpitch_dot_left  = jacobian(legpitch_left, q)*dq;
             legpitch_dot_right = jacobian(legpitch_right, q)*dq;
             
             legroll_left  = atan2(p_lf(2), -p_lf(3));
             legroll_right = atan2(p_rf(2), -p_rf(3));
+            legroll_left = legroll_left.subs(q(obj.getJointIndices({'LeftShinPitch', 'RightShinPitch'})), zeros(2,1));
+            legroll_left = legroll_left.subs(q(obj.getJointIndices({'LeftTarsusPitch', 'RightTarsusPitch'})), deg2rad(13) - q(obj.getJointIndices({'LeftKneePitch', 'RightKneePitch'})));
+            legroll_right = legroll_right.subs(q(obj.getJointIndices({'LeftShinPitch', 'RightShinPitch'})), zeros(2,1));
+            legroll_right = legroll_right.subs(q(obj.getJointIndices({'LeftTarsusPitch', 'RightTarsusPitch'})), deg2rad(13) - q(obj.getJointIndices({'LeftKneePitch', 'RightKneePitch'})));
             legroll_dot_left  = jacobian(legroll_left, q)*dq;
             legroll_dot_right = jacobian(legroll_right, q)*dq;
             
